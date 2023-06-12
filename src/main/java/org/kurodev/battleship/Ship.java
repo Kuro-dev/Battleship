@@ -40,6 +40,7 @@ public class Ship {
     }
 
     public boolean isDestroyed() {
+        //TODO figure out if the ship has been destroyed
         return false;
     }
 
