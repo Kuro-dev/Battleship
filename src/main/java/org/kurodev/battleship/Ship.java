@@ -39,6 +39,10 @@ public class Ship {
         return false;
     }
 
+    public boolean isDestroyed() {
+        return false;
+    }
+
     public Coordinate[] getShipCoordinates() {
         Coordinate[] result = new Coordinate[size];
         if (alignment == ShipAlignment.VERTICAL) {
