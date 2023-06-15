@@ -20,7 +20,9 @@ public class Main {
      * - Every class should handle one responsibility
      */
     public static void main(String[] args) {
-        BattleShipGame game = new BattleShipGame();
-        Ship ship = new Ship("Battlecruiser", new Coordinate(5, 6), 3, ShipAlignment.VERTICAL);
+        Player player1 = new Player("Player#1", Main.class.getResourceAsStream("/playermovement/player1Sim.txt"));
+        Player player2 = new Player("Player#2", Main.class.getResourceAsStream("/playermovement/player2Sim.txt"));
+        BattleShipGame game = new BattleShipGame(player1, player2);
+        game.play();
     }
 }

@@ -24,7 +24,12 @@ public class Ship {
      * point 5 | 7
      */
     public boolean isShipHit(Coordinate point) {
-        //TODO find out if a ship has been hit at a given position
+        Coordinate[] coordinates = getShipCoordinates();
+        for (int i = 0; i < coordinates.length; i++) {
+            if (coordinates[i].equals(point)) {
+                return hits[i];
+            }
+        }
         return false;
     }
 
@@ -35,23 +40,41 @@ public class Ship {
      * @return true if the shot has hit the ship
      */
     public boolean shoot(Coordinate point) {
-        //TODO implement this
+        Coordinate[] coordinates = getShipCoordinates();
+        for (int i = 0; i < coordinates.length; i++) {
+            if (coordinates[i].equals(point)) {
+                if (hits[i]) {
+                    return false;
+                } else {
+                    hits[i] = true;
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     public boolean isDestroyed() {
-        //TODO figure out if the ship has been destroyed
-        return false;
+        for (boolean hit : hits) {
+            if (!hit) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Coordinate[] getShipCoordinates() {
         Coordinate[] result = new Coordinate[size];
         if (alignment == ShipAlignment.VERTICAL) {
             for (int i = 0; i < size; i++) {
+                //since the ship is growing Vertically we only manipulate the Y value, X does not change
                 result[i] = new Coordinate(anchorPoint.getX(), anchorPoint.getY() + i);
             }
         } else {
-            //TODO:  implement the above for horizontal growth
+            for (int i = 0; i < size; i++) {
+                //since the ship is growing Horizontally we only manipulate the X value, Y does not change
+                result[i] = new Coordinate(anchorPoint.getX() + i, anchorPoint.getY());
+            }
         }
         return result;
     }
@@ -76,5 +99,12 @@ public class Ship {
         return alignment;
     }
 
-
+    public boolean containsCoordinate(Coordinate point) {
+        for (Coordinate shipCoordinate : getShipCoordinates()) {
+            if (shipCoordinate.equals(point)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
